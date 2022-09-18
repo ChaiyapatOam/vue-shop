@@ -3,11 +3,13 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/profile">Profile</router-link>
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/addproduct">AddProduct</router-link> 
     </div>
     <router-view />
   </div>
 </template>
+
 
 <style>
 #app {

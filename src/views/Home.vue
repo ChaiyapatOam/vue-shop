@@ -17,15 +17,9 @@
             <a href="#" class="navbar-brand d-flex align-items-center">
               <strong>Kabigon</strong>
             </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarHeader"
-              aria-controls="navbarHeader"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+              aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           </div>
@@ -42,11 +36,7 @@
         <div class="album py-5 bg-light">
           <div class="container">
             <div class="row">
-              <div
-                class="col-md-4"
-                v-for="product in products"
-                :key="product._id"
-              >
+              <div class="col-md-4" v-for="product in products" :key="product._id">
                 <div class="card mb-4 box-shadow">
                   <img class="card-img-top" :src="product.image" />
                   <div class="card-body">
@@ -91,7 +81,7 @@
           </p>
         </div>
       </footer>
-      
+
     </body>
   </div>
 </template>
@@ -106,7 +96,7 @@ export default {
   },
   methods: {
     async getProduct() {
-      const response = await axios.get("http://localhost:3000/product");
+      const response = await axios.get("https://v-shop-backend.herokuapp.com/product");
       console.log(response);
       this.products = response.data;
     },

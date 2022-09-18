@@ -22,7 +22,11 @@ const routes = [
     path:'/profile',
     name: "Profile",
     component : () => import('../views/profile.vue')
-  }
+  },
+  {
+    path:'/addproduct',
+    component : () => import('../views/addproduct.vue')
+  },
 ]
 
 const router = new VueRouter({
