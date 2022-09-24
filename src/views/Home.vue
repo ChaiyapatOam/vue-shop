@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <body>
       <header>
         <div class="collapse bg-dark" id="navbarHeader">
@@ -17,11 +18,8 @@
             <a href="#" class="navbar-brand d-flex align-items-center">
               <strong>Kabigon</strong>
             </a>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-              aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+
+          <Cart/>
           </div>
         </div>
       </header>
@@ -45,18 +43,10 @@
                       {{ product.detail }} <br />
                       <span class="text-danger">{{ product.price }} บาท</span>
                     </p>
-                    <div class="">
-                      <div class="btn-group text-center">
-                        <button type="button" class="btn btn-outline-success">
-                          Buy now
-                        </button>
-                        <!-- <button
-                          type="button"
-                          class="btn  btn-outline-secondary"
-                        >
-                          Edit
-                        </button> -->
-                      </div>
+                    <div class="btn-group text-center">
+                      <button type="button" class="btn btn-outline-success" @click="handleAddProduct(product)">
+                        Buy now
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -66,43 +56,39 @@
         </div>
       </main>
 
-      <footer class="text-muted">
-        <div class="container">
-          <p class="float-right">
-            <a href="#">Back to top</a>
-          </p>
-          <p>
-            Album example is &copy; Bootstrap, but please download and customize
-            it for yourself!
-          </p>
-          <p>
-            New to Bootstrap? <a href="../../">Visit the homepage</a> or read
-            our <a href="../../getting-started/">getting started guide</a>.
-          </p>
-        </div>
-      </footer>
-
     </body>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 import axios from "axios";
+import Cart from "../components/Cart.vue";
 export default {
-  data() {
-    return {
-      products: "",
-    };
-  },
-  methods: {
-    async getProduct() {
-      const response = await axios.get("https://v-shop-backend.herokuapp.com/product");
-      console.log(response);
-      this.products = response.data;
+    data() {
+        return {
+            products: "",
+        };
     },
-  },
-  mounted() {
-    this.getProduct();
-  },
+    computed: {},
+    methods: {
+        ...mapActions({
+            clearCartData: "cart/clearCartData",
+        }),
+        ...mapMutations({ addProduct: "cart/addProduct" }),
+        async getProduct() {
+            const response = await axios.get("https://v-shop-backend.herokuapp.com/product");
+            console.log(response);
+            this.products = response.data;
+        },
+        handleAddProduct(product) {
+            console.log(product);
+            this.addProduct(product);
+        }
+    },
+    mounted() {
+        this.getProduct();
+    },
+    components: { Cart }
 };
 </script>

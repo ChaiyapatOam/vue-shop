@@ -4,13 +4,24 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/profile">Profile</router-link> |
-      <router-link to="/addproduct">AddProduct</router-link> 
+      <router-link to="/addproduct">AddProduct</router-link> |
+      <router-link to="/orders">Orders</router-link> |
     </div>
     <router-view />
   </div>
 </template>
 
-
+<script>
+import { mapActions } from 'vuex'
+export default {
+  methods: {
+    ...mapActions({ initializeCart: "cart/initializeCart" })
+  },
+  created() {
+    this.initializeCart(this.$store)
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
