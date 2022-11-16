@@ -16,10 +16,10 @@
         <div class="navbar navbar-dark bg-dark box-shadow">
           <div class="container d-flex justify-content-between">
             <a href="#" class="navbar-brand d-flex align-items-center">
-              <strong>Kabigon</strong>
+              <strong>Vue-Shop</strong>
             </a>
 
-          <Cart/>
+            <Cart />
           </div>
         </div>
       </header>
@@ -27,7 +27,7 @@
       <main role="main">
         <section class="jumbotron text-center">
           <div class="container">
-            <h1 class="jumbotron-heading">Kabigon Shop</h1>
+            <h1 class="jumbotron-heading">Vue Shop</h1>
           </div>
         </section>
 
@@ -41,11 +41,11 @@
                     <h3 class="card-text">{{ product.name }}</h3>
                     <p class="card-text">
                       {{ product.detail }} <br />
-                      <span class="text-danger">{{ product.price }} บาท</span>
+                      <span class="text-danger">{{ product.price }} ฿</span>
                     </p>
                     <div class="btn-group text-center">
                       <button type="button" class="btn btn-outline-success" @click="handleAddProduct(product)">
-                        Buy now
+                        Add to Cart
                       </button>
                     </div>
                   </div>
@@ -65,30 +65,30 @@ import { mapState, mapActions, mapMutations, mapGetters } from "vuex";
 import axios from "axios";
 import Cart from "../components/Cart.vue";
 export default {
-    data() {
-        return {
-            products: "",
-        };
+  data() {
+    return {
+      products: "",
+    };
+  },
+  computed: {},
+  methods: {
+    ...mapActions({
+      clearCartData: "cart/clearCartData",
+    }),
+    ...mapMutations({ addProduct: "cart/addProduct" }),
+    async getProduct() {
+      const response = await axios.get(this.$store.state.apiUrl + "/product");
+      // console.log(response);
+      this.products = response.data;
     },
-    computed: {},
-    methods: {
-        ...mapActions({
-            clearCartData: "cart/clearCartData",
-        }),
-        ...mapMutations({ addProduct: "cart/addProduct" }),
-        async getProduct() {
-            const response = await axios.get("https://v-shop-backend.herokuapp.com/product");
-            console.log(response);
-            this.products = response.data;
-        },
-        handleAddProduct(product) {
-            console.log(product);
-            this.addProduct(product);
-        }
-    },
-    mounted() {
-        this.getProduct();
-    },
-    components: { Cart }
+    handleAddProduct(product) {
+      console.log(product);
+      this.addProduct(product);
+    }
+  },
+  mounted() {
+    this.getProduct();
+  },
+  components: { Cart }
 };
 </script>

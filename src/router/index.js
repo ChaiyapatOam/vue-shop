@@ -26,19 +26,20 @@ const routes = [
   },
   {
     path: "/addproduct",
-    component: () => import("../views/addproduct.vue"),
+    component: () => import("../views/AddProduct.vue"),
   },
   {
-    path: "/checkout",
-    component: () => import("../views/checkout.vue"),
+    path: "/checkout", 
+    component: () => import("../views/CheckOut.vue"),
   },
   {
     path: "/orders",
-    component: () => import("../views/orders.vue"),
+    component: () => import("../views/Orders.vue"),
   },
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 

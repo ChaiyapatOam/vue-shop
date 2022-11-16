@@ -36,9 +36,9 @@ export default {
     data() {
         return {
             order: {
-                name: "Kabigon",
-                phone: "0617932",
-                address: "123434"
+                name: "",
+                phone: "",
+                address: ""
             }
         }
     },
@@ -63,7 +63,7 @@ export default {
                 cart: JSON.stringify(this.cart),
                 total: this.total
             }
-            await axios.post("https://v-shop-backend.herokuapp.com/order", body)
+            await axios.post(this.$store.state.apiUrl + "/order", body)
             this.$router.push("/")
             this.clearCartData()
         }

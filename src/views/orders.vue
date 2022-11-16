@@ -52,8 +52,8 @@ export default {
     },
     methods: {
         async getOrder() {
-            const response = await axios.get("https://v-shop-backend.herokuapp.com/order");
-            console.log(response);
+            const response = await axios.get(this.$store.state.apiUrl + "/order");
+            // console.log(response);
             this.orders = response.data;
         },
     },
